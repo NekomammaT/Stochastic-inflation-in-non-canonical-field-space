@@ -1,0 +1,1291 @@
+\documentclass[a4paper,11pt]{article}
+\pdfoutput=1
+\usepackage{jcappub}
+\usepackage{graphicx}
+\usepackage[caption=false]{subfig}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{braket}
+\usepackage{listings}
+\usepackage{cases}
+\usepackage{comment}
+\usepackage{soul}
+\usepackage{cancel}
+\usepackage{cases}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{longtable}
+\usepackage[normalem]{ulem}
+%\usepackage{hyperref}
+
+%\usepackage{mathpazo}
+%\usepackage[no-math]{fontspec}
+%\setmainfont{Palatino}
+%\setsansfont{Optima}
+
+\newcommand{\dif}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pdif}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\var}[2]{\frac{\delta #1}{\delta #2}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\DD}{\mathscr{D}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\Mpl}{M_\text{Pl}}
+\newcommand{\ns}{n_{{}_\mathrm{S}}}
+\newcommand{\cs}{c_{{}_\mathrm{S}}}
+\newcommand{\IR}{\text{IR}}
+\newcommand{\UV}{\text{UV}}
+\renewcommand{\Re}{\mathrm{Re}}
+\renewcommand{\Im}{\mathrm{Im}}
+\newcommand{\dk}{\frac{\dd^3k}{(2\pi)^3}}
+\newcommand{\bbalpha}{{\alpha\!\!\!\alpha}}
+\newcommand{\dps}{\displaystyle}
+\newcommand{\SIA}{S_\text{IA}}
+\newcommand{\eff}{\text{eff}}
+\newcommand{\kdx}{\mathbf{k}\cdot\mathbf{x}}
+\newcommand{\Pbraket}[1]{\left\{ #1 \right\}}
+
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\scrD}{\mathscr{D}}
+\newcommand{\calg}{\mathcal{g}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\scrH}{\mathscr{H}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\scrJ}{\mathscr{J}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\scrL}{\mathscr{L}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\scrO}{\mathscr{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calR}{\mathcal{R}}
+
+\newcommand{\bae}[1]{\begin{align} #1 \end{align}}
+\newcommand{\bce}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\bfe}[4]{
+\begin{figure} 
+	\centering
+	\includegraphics[#1]{#2}
+	\caption{#3}
+	\label{#4}
+\end{figure}}
+\newcommand{\bpme}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+
+\newcommand{\Red}[1]{\textcolor{red}{\sffamily #1}}
+\newcommand{\Mag}[1]{\textcolor{magenta}{\sffamily #1}}
+\newcommand{\Blue}[1]{\textcolor{blue}{\sffamily #1}}
+\newcommand{\mathblue}[1]{\textcolor{blue}{#1}}
+
+
+
+
+\title{Stochastic inflation in non-canonical field space}
+
+\author[a]{Lucas Pinol,}
+\author[a]{Sébastien Renaux-Petel,}
+\author[a,b]{and Yuichiro Tada}
+
+\affiliation[a]{Institut d'Astrophysique de Paris, GReCO, UMR 7095 du CNRS et de Sorbonne Universit\'e, 98bis boulevard Arago, 75014 Paris, France}
+\affiliation[b]{Department of Physics, Nagoya University, Nagoya 464-8602, Japan}
+
+\emailAdd{pinol@iap.fr}
+\emailAdd{renaux@iap.fr}
+\emailAdd{tada.yuichiro@e.mbox.nagoya-u.ac.jp}
+
+\abstract{
+The stochastic inflation is formulated in a generalized non-flat field space.
+Including metric perturbations, we derive the Langevin equation in a covariant language with use of the effective Hamiltonian action approach
+as well as reviewing the heuristic equation of motion method.
+It is clarified that the Friedmann equation still holds in each Hubble patch without any stochastic noise
+since the correction terms in the effective action do not explicitly depend on the lapse function.
+We also mention the uncertainty on the interpretation of noise integral.
+}
+
+\keywords{}
+\arxivnumber{}
+
+
+\begin{document}
+\maketitle
+\flushbottom
+%\tableofcontents
+
+
+\section{Introduction}\label{sec: introduction}
+
+Recent cosmic microwave background (CMB) data from the Planck and BICEP2/Keck collaborations
+severely constrain the physics of the early universe as the spectral index of primordial curvature perturbations $\ns=0.968\pm0.006$ ($95\%$ C.L.)
+and the tensor-to-scalar ratio $r<0.12$ ($95\%$ C.L.)~\cite{Ade:2015lrj,Ade:2015tva}.
+Inflation~\cite{Starobinsky:1980te,Sato:1980yn,Guth:1980zm,Linde:1981mu,Albrecht:1982wi,Linde:1983gd} 
+is one of the most plausible scenario consistent with these observations,
+which naturally yields almost scale-invariant curvature perturbations
+from the quantum zero point fluctuations as well as solves the crucial problems of 
+the big-bang theory~\cite{Mukhanov:1981xt,Hawking:1982cz,Starobinsky:1982ee,Guth:1982ec,Bardeen:1983qw}.
+Despite of its great success, the concrete mechanism of inflation has not been clarified yet.
+In such a situation, represented by e.g. $\alpha$-attractor~\cite{}, the geometrical destabilization of inflation~\cite{Renaux-Petel:2015mga,Renaux-Petel:2017dia,
+Garcia-Saenz:2018ifx}, hyperinflation~\cite{Brown:2017osf,Mizuno:2017idt}, and so on, the possibility of non-canonical kinetic term has attracted more attentions
+other than the tuning of the potential term. Indeed the field space metric encoded by the kinetic term is not necessarily flat in multi-inflaton cases in general.
+
+One of the key feature distinguishing inflationary models is scalar fluctuations. Pioneered by Starobinsky, the so-called stochastic formalism~\cite{Starobinsky:1986fx,
+Nambu:1987ef,Nambu:1988je,Kandrup:1988sc,Nakao:1988yi,Nambu:1989uf,Mollerach:1990zf,
+Linde:1993xx,Starobinsky:1994bd,Rigopoulos:2004gr,Rigopoulos:2005xx,Finelli:2008zg,Finelli:2010sh} is known as a powerful tool to investigate 
+the diffusion dynamics of scalar fields due to the quantum zero-point fluctuation. In this formalism, the superhorizon coarse-grained fields are
+considered as background fields and then the subhorizon modes exiting the horizon are naturally interpreted as random noise, reproducing the scalar fluctuations.
+
+Though it is derived in a fully slow-rolled assumption originally, the phase space expression from the Hamilton-Jacobi equation has been addressed in 
+Refs.~\cite{Tolley:2008na,Grain:2017dqa,Ezquiaga:2018gbw}, enabling us to go beyond the slow-roll limit and include metric perturbations.
+In \cite{Tolley:2008na}, a non-canonical field-space metric is also considered. On the other hand, following the path integral formulation of the quantum 
+Brownian motion~\cite{Schwinger:1960qe,Feynman:1963fq}, several authors work on the effective action formalism for 
+the stochastic inflation~\cite{Morikawa:1989xz,Matarrese:2003ye,Levasseur:2013ffa,Moss:2016uix,Tokuda:2017fdh}, 
+which can be naturally extended to loop calculations beyond leading order, though without metric perturbations.
+In this paper, we completely formulate the phase space stochastic formalism in the non-canonical field space with use of the effective Hamiltonian action
+including metric perturbations. Thanks to the metric perturbation, we also clarify that the Friedmann constraint does hold in each Hubble patch
+even in the stochastic formalism.
+
+The rest of this paper is organized as follows. In Sec.~\ref{sec: heuristic approach}, we review the stochastic formalism, implying 
+the conclusive Langevin equation in a heuristic equation of motion approach. 
+The derivation of this equation in terms of the effective Hamiltonian action 
+is shown in Sec.~\ref{sec: effective action}. We also mention the practical implementation of this formalism in Sec.~\ref{sec: complementaries}.
+Sec.~\ref{sec: conclusions} is devoted to conclusions.
+
+
+
+
+
+
+\section{Stochastic formalism: heuristic approach}\label{sec: heuristic approach}
+
+The quantum nature of the scalar fields is responsible for fluctuations of their amplitudes around their classical values. 
+In standard inflation, each field is decomposed into a homogeneous background and a small quantum perturbation. 
+This setup can be justified in some cases, for example when the fields are heavy and the classical trajectory dominates the dynamics. 
+One should however be aware that this is only a good approximation. 
+Indeed any two points beyond the horizon scale are decoupled by causality and therefore there is no reason that the universe is dominated by
+homogeneous fields in general. For light fields, inhomogeneities can develop on superhorizon scale and determines their dynamics.
+Based on these facts, the stochastic formalism~\cite{Starobinsky:1986fx,Nambu:1987ef,Nambu:1988je,Kandrup:1988sc,Nakao:1988yi,
+Nambu:1989uf,Mollerach:1990zf,Linde:1993xx,Starobinsky:1994bd,Rigopoulos:2004gr,Rigopoulos:2005xx,Finelli:2008zg,Finelli:2010sh} 
+directly treats the coarse-grained fields on
+the horizon scale as backgrounds.
+The key feature of the dynamics of the coarse-grained modes is that
+they seem to receive random noise because the subhorizon modes which is quantum mechanically uncertain exit the horizon and 
+join to the coarse-grained fields every moment. 
+These fluctuations, in the stochastic formalism, may determine the dynamics of light fields and also will cause primordial curvature perturbations
+after inflation~\cite{Fujita:2013cna,Fujita:2014tja,Vennin:2015hra}.
+
+In this section, we recall the principles of the stochastic formalism expressed in a Hamiltonian language~\cite{Tolley:2008na,Grain:2017dqa,Ezquiaga:2018gbw}, 
+but applying it to the most general case of a non-canonical field space. 
+This enables to identify clearly the true degrees of freedom of the theory in phase space beyond the slow-roll limit, 
+and express the equations in a covariant way. 
+We also include the back-reaction of the fields on space-time by allowing perturbations of the metric. 
+The general action of several scalar fields minimally coupled to gravity is
+\bae{\label{eq: original action}
+	S=\int\dd^4x\scrL=\int\dd^4x\sqrt{-g}\left[\frac{1}{2}\Mpl^2\calR-\frac{1}{2}g^{\mu\nu}G_{IJ}(\phi)\partial_\mu\phi^I\partial_\nu\phi^J-V(\phi)\right],
+}
+where $\calR$ is the Ricci scalar for the spacetime metric $g_{\mu\nu}$. The field space metric $G_{IJ}$ is not necessarily flat in general.
+For the spacetime metric, we adopt the ADM formalism
+\bae{\label{eq: ADM}
+	\dd s^2=-N^2\dd t^2+\gamma_{ij}(\dd x^i+\beta^i\dd t)(\dd x^j+\beta^j\dd t).
+}
+$N$ is the lapse function, $\beta^i$ is the shift vector, and $\gamma_{ij}$ is the spatial symmetric metric.
+%One can see that the lapse and shift vector appear in the action as simple Lagrange multipliers, that is, the action does not include any
+%time derivative of them. Therefore their four d.o.f. are killed by the corresponding constraints. Other four d.o.f. in the spatial metric can be fixed
+%by choosing a gauge. 
+We adopt the spatially flat gauge $\gamma_{ij}(t,\mathbf{x})=a^2(t)(\delta_{ij}+h_{ij}(t,\mathbf{x}))$ 
+where $h_{ij}$ is the transverse traceless tensor $\partial_ih_{ij}=h_{ii}=0$.\footnote{In general, the scale factor will be inhomogeneous 
+through the Friedmann equation
+since the background coarse-grained fields are fluctuated. That is, the spatially flat gauge condition is violated by noise terms, strictly speaking.
+By taking the scale factor itself (or equivalently the e-folding number which is the logarithm of the scale factor)
+as a time variable, the scale factor can be kept spatially homogeneous on a equal time slice.} 
+Throughout this paper, we will neglect the tensor perturbations. Indeed at least in the subhorizon 
+phase, the tensor modes are decoupled from the scalar perturbations since we only consider the linear perturbation theory. 
+The Ricci scalar for three-dimensional space-like hypersurfaces thus vanishes and the action reads~\cite{Salopek:1990jq}
+\bae{
+	S=\int\dd^4xa^3N\left[\frac{\Mpl^2}{2}\left(K_{ij}K^{ij}-K^2\right)+\frac{1}{2N^2}G_{IJ}v^Iv^J-\frac{1}{2a^2}G_{IJ}\partial_i\phi^I\partial_i\phi^J-V\right],
+}
+where
+\bae{
+	K_{ij}=\frac{1}{2N}(\beta_{i,j}+\beta_{j,i}-2a^2\calH\delta_{ij}), \quad\quad K=K^i_i, \quad\quad v^I=\dot{\phi}^I-\beta^i\partial_i\phi^I.
+}
+The spatial indices $i$ and $j$ are raised and lowered by the spatial metric $\gamma_{ij}=a^2\delta_{ij}$ and $\gamma^{ij}=a^{-2}\delta_{ij}$.
+Commas and dots represent spatial and time derivatives and the curly $\calH=\dot{a}/a$ stands for the generalized Hubble parameter
+for arbitrary $N$, while the normal $H$ is left for the standard Hubble parameter with $N=1$.
+
+Let us now define the canonically conjugate variables of our theory as
+\bae{\label{eq: Legendre trs}
+	\pi^{ij}&=\var{S}{\dot{\gamma}_{ij}}=a^3(K\gamma^{ij}-K^{ij}), \quad\quad
+	\pi_I=\var{S}{\dot{\phi}^I}=\frac{a^3}{N}G_{IJ}(\dot{\phi}^I-\beta^i\partial_i\phi^I), \nonumber \\
+	\pi_N&=\var{S}{\dot{N}}=0, \quad\quad
+	\pi_{\beta^i}=\var{S}{\dot{\beta}^i}=0.
+}
+The Poisson brackets of these variables are defined by
+\bae{
+	\Pbraket{\gamma_{ij}(\mathbf{x}),\pi^{kl}(\mathbf{y})}
+	&=\frac{1}{2}(\delta_i^k\delta_j^l+\delta_i^l\delta_j^k)\delta^{(3)}(\mathbf{x}-\mathbf{y}), \quad\quad
+	\Pbraket{\phi^I(\mathbf{x}),\pi_J(\mathbf{y})}=\delta^I_J\delta^{(3)}(\mathbf{x}-\mathbf{y}), \nonumber \\
+	\Pbraket{N(\mathbf{x}),\pi_N(\mathbf{y})}&=\delta^{(3)}(\mathbf{x}-\mathbf{y}), \quad\quad
+	\Pbraket{\beta^i(\mathbf{x}),\pi_{\beta^j}(\mathbf{y})}=\delta^i_j\delta^{(3)}(\mathbf{x}-\mathbf{y}).
+}
+It is worth noting that the conjugate momenta of $N$ and $\beta^i$ vanish and therefore they are non-dynamical modes.
+It is the strong point of the ADM formalism that the non-dynamical modes appear clearly in the action in this way.
+The corresponding Hamiltonian equation will give the constraint equations as we will see.
+
+With these variables, the Hamiltonian density given by
+\bae{
+	\scrH=\pi^{ij}\dot{\gamma}_{ij}+\pi_I\dot{\phi}^I-\calL,
+}
+can be rewritten in a convenient form as
+\bae{\label{eq: Hamiltonian}
+	\scrH=N(C^G+C^\phi)+\beta^i(C_i^G+C_i^\phi),
+}
+where
+\bae{
+	C^G&=\frac{2\Mpl^2}{a^3}\left[\pi_{ij}\pi^{ij}-\frac{1}{2}(\pi^i_i)^2\right], \quad\quad
+	C^G_i=-2\Mpl^2\gamma_{ij}\partial_k\pi^{jk}, \nonumber \\
+	C^\phi&=\frac{G^{IJ}}{2a^3}\pi_I\pi_J+\frac{G_{IJ}a^3}{2}\gamma^{ij}\partial_i\phi^I\partial_j\phi^J+a^3V, \quad\quad
+	C^\phi_i=\pi_I\partial_i\phi^I.
+}
+The superscripts $G$ and $\phi$ represent the gravitational and inflatons sectors respectively.
+Any function $F$ of the canonical variables evolves according to the Hamiltonian evolution $\dot{F}=\Pbraket{F,\int\dd^3x\scrH}$.
+Applying it to the canonical variables themselves, one obtains the equations of motion (EoM) of the system, as well as the constraint equations as
+\bae{
+	\dot{\phi}^I&=\frac{N}{a^3}G^{IJ}\pi_J+\beta^i\partial_i\phi^I, \label{eq: phi EoM}\\
+	\dot{\pi}_I&=-a^3NV_I+\partial_i\left(aNG_{IJ}\partial_i\phi^J\right)-\frac{aN}{2}G_{JK,I}\partial_i\phi^J\partial_i\phi^K
+	-\frac{N}{2a^3}G^{JK}{}_{,I}\pi_J\pi_K+\partial_i(\beta^i\pi_I), \label{eq: pi EoM} \\
+	0=\dot{\pi}_N&=-(C^G+C^\phi), \label{eq: energy const} \\
+	0=\dot{\pi}_{\beta^i}&=-(C^G_i+C^\phi_i). \label{eq: momentum const}
+}
+Here $V_I=\partial V/\partial\phi^I$, $G_{IJ,K}=\partial G_{IJ}/\partial\phi^K$, and so on.
+Eqs.~(\ref{eq: energy const}) and (\ref{eq: momentum const}) can be seen as the energy and momentum constraints.
+Solving them, one can explicitly express the metric perturbations in terms of the inflaton fields consistently with the fact that $N$ and $\beta^i$
+are non-dynamical modes.
+
+Taking the homogeneous limit of these equations, one obtains the classical EoM and the Friedmann equation
+\bae{\label{eq: classical EoM}
+	\dot{\phi}^I_0=\frac{N_0}{a^3}G^{IJ}\pi_{0J}, \quad\quad D_t\pi_{0I}=-a^3N_0V_I, \quad\quad 
+	\frac{3\Mpl^2\calH^2}{N_0^2}=\frac{1}{2a^6}G^{IJ}\pi_{0I}\pi_{0J}+V,
+}
+while the momentum constraint is trivial. The subscript $0$ represents the homogeneous mode of variables.
+$D_t$ is a covariant derivative
+\bae{
+	D_t\pi_{0I}=\dot{\pi}_{0I}-\Gamma_{IJ}^K\dot{\phi}_0^J\pi_{0K},
+}
+with the affine connection $\Gamma_{IJ}^K$ for the field space metric $G_{IJ}$.
+On the other hand, in the stochastic framework, all the fields are divided into classical superhorizon IR modes and 
+quantum subhorizon UV perturbations. That is, the fields and the metric components are decomposed into IR and UV parts as
+\bae{\label{eq: IRUV decomposition}
+	\phi^I=\varphi^I+Q^I, \quad\quad \pi_I=\varpi_I+P_I, \quad\quad N=N_\IR+\alpha, \quad\quad \beta^i=0+a^{-2}\partial_i\psi,
+}
+where $Q^I$, $P_I$, $\alpha$, and $\psi$ are their UV perturbations.
+Each UV component of a quantity $X$ is defined by
+\bae{
+	X_\UV(x)=\int\dk\ee^{i\kdx}W(k/k_\sigma(t))X(t,\mathbf{k}),
+}
+with some window function $W$ taking only short-wavelength modes $k>k_\sigma(t)$.
+The simple step function $\theta(k-\sigma aH)$ is often used as a window function as we will do so.
+The time dependent cutoff scale $k_\sigma^{-1}=1/\sigma aH$ with a small model parameter $\sigma\ll1$ 
+is chosen to be larger enough than the Hubble scale
+$1/aH$ to allow the gradient expansion (namely the $\sigma$-expansion). 
+In that way the remaining IR modes $\varphi^I$ and $\varpi_I$ with $k<k_\sigma(t)$ are well above the comoving Hubble radius
+and can be considered as classicalized.
+$N_\IR$ and $\beta^i_\IR$ are pure gauge choices in the long-wavelength limit
+and one can fix $\beta^i_\IR=0$, while we kept $N_\IR$ for arbitrary choice of the time variable. 
+Also since we will only consider the linear theory for UV modes, the vector component in $\beta^i$ is decoupled and 
+only the scalar component $\psi$ will be taken into account.
+
+While we consider the linear theory for UV modes, we do not have to use perturbative expansions in IR modes with use of the gradient expansion instead.
+That is, substituting the decomposition~(\ref{eq: IRUV decomposition}) into the original EoM~(\ref{eq: phi EoM}) and (\ref{eq: pi EoM}) 
+and keeping the linear terms in UV modes and the leading terms in $\sigma$, 
+one can obtain the non-linear EoM for IR modes with the corrections by UV modes as
+\bae{\label{eq: decomposed EoM}
+	\bce{
+		\dps
+		\dot{\varphi}^I=\frac{N_\IR}{a^3}G^{IJ}\varpi_J-\int\dk\ee^{i\kdx}\left[\dot{W}(k/k_\sigma)\phi^I(t,\mathbf{k})
+		-W(k/k_\sigma)E_Q^I(t,\mathbf{k})\right], \\[10pt]
+		\dps
+		D_t\varpi_I=-a^3N_\IR V_I-\int\dk\ee^{i\kdx}\left[\dot{W}(k/k_\sigma)\tilde{\pi}_I(t,\mathbf{k})
+		-W(k/k_\sigma)E_{PI}(t,\mathbf{k})\right].
+	}
+}
+where 
+\bae{
+	\tilde{\pi}_I(t,\mathbf{k})=\pi_I(t,\mathbf{k})-\Gamma_{IJ}^K\varpi_J\phi^K(t,\mathbf{k}), \quad\quad
+	D_t\varpi_I=\dot{\varpi}_I-\Gamma_{IJ}^K\dot{\varphi}^J\varpi_K.
+}
+$E_Q^I$ and $E_{PI}$ are the linearized EoM for the UV modes $Q$ and $P$ in Fourier space, which should vanish in the linear perturbation theory.
+Their explicit forms are shown in Sec.~\ref{sec: UV EoM}. 
+Therefore we assume $E_Q^I=0=E_{PI}$,\footnote{One can check the covariance of Eq.~(\ref{eq: decomposed EoM})
+with use of these UV EoM.} 
+but there are additional terms from the time-derivative of the window function other than them
+since the coarse-graining scale $k_\sigma=\sigma aH$ is now time-dependent.
+They represent the effect that the UV modes cross the coarse-graining scale and join the IR parts.
+Calling them $\xi_Q^I$ and $\xi_{\tilde{P}I}$ as
+\bae{
+	\xi_Q^I(x)=-\int\dk\ee^{i\kdx}\dot{W}(k/k_\sigma)\phi^I(t,\mathbf{k}), \quad\quad 
+	\xi_{\tilde{P}I}(x)=-\int\dk\ee^{i\kdx}\dot{W}(k/k_\sigma)\tilde{\pi}_I(t,\mathbf{k}),
+}
+the covariant EoM for IR modes is given by
+\bae{\label{eq: Langevin in heuristic}
+	\dot{\varphi}^I=\frac{N_\IR}{a^3}G^{IJ}\varpi_J+\xi_Q^{I}, \quad\quad
+	D_t\varpi_I=-a^3N_\IR V_I+\xi_{\tilde{P}I}.
+}
+These $\xi$ are nothing but the classical noise for coarse-grained fields and make them Brownian motions.
+
+The interpretation of $\xi$ terms can be suggested by their statistics. If one adopts the step window function $W(k/k\sigma)=\theta(k-k_\sigma)$,
+$\xi$'s quantum correlators can be calculated as
+\bae{\label{eq: noise correlation}
+	\bce{
+		\dps
+		\braket{\xi_Q^I}=\braket{\xi_{\tilde{P}I}}=0, \\[10pt]
+		\dps
+		\braket{\xi_Q^I(x)\xi_Q^J(x^\prime)}
+		=\calP_{QQ}{}^{IJ}(k_\sigma)\frac{\dot{k}_\sigma}{k_\sigma}\delta(t-t^\prime)\frac{\sin k_\sigma r}{k_\sigma r},
+		\\[10pt]
+		\dps
+		\braket{\xi_Q^I(x)\xi_{\tilde{P}J}(x^\prime)}=\braket{\xi_{\tilde{P}J}(x)\xi_Q^I(x^\prime)}^*
+		=\calP_{Q\tilde{P}}{}^I{}_J(k_\sigma)\frac{\dot{k}_\sigma}{k_\sigma}\delta(t-t^\prime)
+		\frac{\sin k_\sigma r}{k_\sigma r}, \\[10pt]
+		\dps
+		\braket{\xi_{\tilde{P}I}(x)\xi_{\tilde{P}J}(x^\prime)}=\calP_{\tilde{P}\tilde{P}IJ}(k_\sigma)\frac{\dot{k}_\sigma}{k_\sigma}\delta(t-t^\prime)
+		\frac{\sin k_\sigma r}{k_\sigma r},
+	}
+}
+where $r=|\mathbf{x}-\mathbf{x}^\prime|$ and
+\bae{
+	(2\pi)^3\delta^{(3)}(\mathbf{k}+\mathbf{k}^\prime)\frac{k^3}{2\pi^2}\calP_{QQ}{}^{IJ}(k)=\braket{\phi^I(t,\mathbf{k})\phi^J(t,\mathbf{k}^\prime)},
+}
+and so on. Since the IR fields are treated as classical backgrounds in the stochastic formalism, $\xi$ would be also interpreted as 
+classical but random variables whose statistics inherits the above quantum correlators. Their correlations are suppressed by
+$\sin k_\sigma r/k_\sigma r$ beyond the coarse-graining scale. Also the noise follows the Gaussian distribution since we here consider
+only the linear perturbation theory.
+Therefore $\xi$ is regarded as white ($\propto\delta(t-t^\prime)$) and $k_\sigma$-patch-independent
+Brownian noise. This is the heuristic derivation of the Langevin EoM in the stochastic formalism.
+
+Let us mention the reality of the noise terms.
+Since $\varphi^I$ and $\varpi_I$ are real scalar fields, the noise terms should be also real so that Eq.~(\ref{eq: Langevin in heuristic})
+can be interpreted as a proper Langevin equation. However the noise correlations~(\ref{eq: noise correlation}) do not ensure their reality at all.
+Therefore, to apply the stochastic formalism, all imaginary parts of noise correlations should be at least suppressed by 
+the gradient expansion $\sigma$. In the massless limit, the imaginary parts are indeed suppressed by $\calO(\sigma^3)$ as we will see
+in Sec.~\ref{sec: UV EoM}. In more general cases, one has to carefully check whether imaginary parts can be neglected or not.%\footnote{The 
+%imaginary parts correspond with the antisymmetric component of the noise correlations as can be seen in Eq.~(\ref{eq: noise correlation}).
+%We will see in Sec.~\ref{} that the Fokker-Planck equation equivalent to our Langevin equation~(\ref{eq: Langevin in heuristic}) depends only on
+%the symmetric part of the noise correlations. Therefore the assumption that the IR modes are well-classicalized, or equivalently,
+%the observables can be described well by the Fokker-Planck equation can be validated only if the antisymmetric part is negligible.
+%It again suggests that the negligiblity of the imaginary part of noise is one necessary condition for the stochastic formalism.}
+
+We also mention the energy constraint~(\ref{eq: energy const}). It reads in the stochastic formalism
+\bae{
+	-\frac{3\Mpl^2\calH^2}{N_\IR^2}+\frac{G^{IJ}}{2a^6}\varpi_I\varpi_J+V=-\frac{6\Mpl^2\calH^2}{N_\IR^3}\alpha
+	-\frac{2\Mpl^2\calH}{N_\IR^2}\frac{\nabla^2}{a^2}\psi-\frac{G^{IJ}}{a^6}\varpi_IP_J-\frac{G^{IJ}{}_{,K}}{2a^6}\varpi_I\varpi_JQ^K-V_IQ^I.
+}
+Because it does not include any time derivative, it can be decomposed completely into IR and UV parts by taking its spatial derivative and applying the 
+long-wavelength limit $\sigma\to0$ as 
+\bae{\label{eq: perturbation energy const}
+	\bce{
+		\dps
+		-\frac{3\Mpl^2\calH^2}{N_\IR^2}+\frac{G^{IJ}}{2a^6}\varpi_I\varpi_J+V=0, \\[10pt]
+		\dps
+		-\frac{6\Mpl^2\calH^2}{N_\IR^3}\alpha-\frac{2\Mpl^2\calH}{N_\IR^2}\frac{\nabla^2}{a^2}\psi
+		-\frac{G^{IJ}}{a^6}\varpi_IP_J-\frac{G^{IJ}{}_{,K}}{2a^6}\varpi_I\varpi_JQ^K-V_IQ^I=0.
+	}
+}
+The first one is nothing but the standard Friedmann constraint. Therefore it is suggested that the Friedmann constraint does hold in each 
+$k_\sigma$-patch
+even in the stochastic formalism. It will be checked also in the effective action approach. Note that, if one converts $\varpi_I$ to $\dot{\varphi}^I$
+with use of the IR EoM~(\ref{eq: Langevin in heuristic}), the Friedmann constraint necessarily includes the noise term.
+That is one of the reasons why the Hamiltonian language is preferred to the Lagrangian one in the stochastic formalism.
+
+
+
+
+
+
+
+%\begin{itemize}
+%\item introduce our notation
+%\item derive the Langevin eq. in the EoM approach
+%\item linear theory for UV but non-perturbative for IR
+%\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+The basic idea of the stochastic formalism is that the inflaton fields coarse-grained on a superhorizon scale should be interpreted as
+the classical background fields rather than the homogeneous modes because the perturbations exiting the horizon will be classicalized by
+some mechanism and unable to be distinguished from the homogeneous modes.
+Following this hypothesis, one would derive the classical equation of motion (EoM) for the coarse-grained fields in the stochastic formalism.
+In this section, we simply decompose the original scalar EoM into the coarse-grained part and the short-wavelength perturbation
+to imply the conclusive equation.
+
+Since we take into account the metric sector and then several constraint equations appear,
+the Hamiltonian language would be useful. The same approach can be seen in Refs.~\cite{Habib:1992ci,Grain:2017dqa}.
+Adopting the ADM formalism for the metric
+\bae{
+	\dd s^2=-N^2\dd t^2+\gamma_{ij}\left(\dd x^i+\beta^i\dd t\right)\left(\dd x^j+\beta^j\dd t\right).
+}
+one can expand the action as~\cite{Salopek:1990jq}
+\bae{
+	S&=\int\dd^4x\sqrt{-g}\left[\frac{1}{2}\Mpl^2R-\frac{1}{2}G_{IJ}(\phi)g^{\mu\nu}\partial_\mu\phi^I\partial_\nu\phi^J-V(\phi)\right] \nonumber \\
+	&=\int\dd^4xN\sqrt{\gamma}\left[\frac{\Mpl^2}{2}\left(K_{ij}K^{ij}-K^2\right)-G_{IJ}g^{\mu\nu}\partial_\mu\phi^I\partial_\nu\phi^J-V\right],
+}
+where
+\bae{
+	K_{ij}=\frac{1}{2N}(\beta_{i,j}+\beta_{j,i}-2a^2\calH\delta_{ij}), \quad\quad K=K^i_i.
+}
+The spatial indices $i$ and $j$ are raised and lowered by the spatial metric $\gamma_{ij}=a^2\delta_{ij}$ and $\gamma^{ij}=a^{-2}\delta^{ij}$.
+Commas and dots represent spatial and time derivatives and the calligraphy $\calH=\dot{a}/a$ stands for the generalized Hubble parameter
+for arbitrary $N$, while the normal $H$ is left for the standard Hubble parameter with $N=1$.
+Capital Latin indices $I$ and $J$ label the scalar fields and the field space metric $G_{IJ}(\phi)$ is not flat in general.
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\section{Effective Hamiltonian action}\label{sec: effective action}
+
+The purpose of the stochastic formalism is describing the dynamics of coarse-grained fields. 
+Therefore it may come to one's mind to construct an effective theory for coarse-grained fields like as renormalization.
+That is, by integrating out the UV modes, one can obtain the effective action for IR modes and the correction terms from UV parts 
+are expected to represent the noise contribution. In cosmology, the expectation values of various operators are often calculated for 
+an in-state known as the Bunch-Davies vacuum for example, instead of the in-out scattering amplitude as often calculated in particle physics.
+In this case, the partition function for in-in expectation values can be formulated by the path integral along with a closed time path (CTP) from the in-state
+to the in-state again via a sufficient future time~\cite{Schwinger:1960qe,Feynman:1963fq}.
+Several authors~\cite{Morikawa:1989xz,Matarrese:2003ye,Levasseur:2013ffa,Moss:2016uix} formulated the stochastic inflation 
+with use of this CTP formalism in terms of the Lagrangian where the independent variables are $\phi$ and $\dot{\phi}$.
+However, in the stochastic formalism, $\phi$ is a stochastic process and its time-derivative $\dot{\phi}$ is not mathematically well-defined.
+Also, metric perturbations being included as generally required, the constraint equations will be much clear in the Hamiltonian language.
+Therefore in this section we derive the Langevin equations by constructing the effective action in the Hamiltonian formalism.
+
+%The noise identification in the previous section seems to be relatively ad hoc and unclear.
+%In the stream of the derivation of the quantum Brownian motion in the path integral approach,
+%Morikawa~\cite{Morikawa:1989xz} proposed the effective action approach to obtain the Langevin equation for IR modes 
+%by integrating out UV modes in the in-in or closed time path (CTP) formalism~\cite{Schwinger:1960qe,Feynman:1963fq}.
+%After that, several authors followed this approach~\cite{Matarrese:2003ye,Levasseur:2013ffa,Moss:2016uix}.
+%Though their analyses were in terms of the Lagrangian, recently Tokuda and Tanaka~\cite{Tokuda:2017fdh} showed the effective action with use of
+%the Hamiltonian language in the single field without metric perturbations, which we extend in this paper.
+
+We again start by the general multi-scalar action~(\ref{eq: original action}) 
+\bae{
+	S=\int\dd^4x\sqrt{-g}\left[\frac{1}{2}\Mpl^2\calR-\frac{1}{2}g^{\mu\nu}G_{IJ}(\phi)\partial_\mu\phi^I\partial_\nu\phi^J-V(\phi)\right],
+}
+in the flat-gauge ADM formalism~(\ref{eq: ADM})
+\bae{
+	\dd s^2=-N^2\dd t^2+a^2(\dd x^i+\beta^i\dd t)(\dd x^j+\beta^j\dd t).
+}
+In terms of the Hamiltonian, the action can be written as
+\bae{
+	S=\int\dd^4x(\pi^{ij}\dot{\gamma}_{ij}+\pi_I\dot{\phi}^I-\scrH),
+}
+where the Hamiltonian density is given by Eq.~(\ref{eq: Hamiltonian}).
+Note that here $\dot{\gamma}_{ij}$ and $\dot{\phi}^I$ are not independent variables but functions of $\phi^I$, $\pi_I$, and so on,
+given by the solutions of the Legendre transformation~(\ref{eq: Legendre trs}).
+
+{\bf SRP: Actually, in the path integral formulation that we will ue below, we will not (and we can not) use these on-shell relations}
+
+Because we only consider the linear perturbation for UV modes throughout this paper, we expand the action
+up to quadratic order in them as
+\bae{
+	S\simeq&\,S^{(0)}+S^{(1)}+S^{(2)}, \\
+	S^{(0)}=&\int\dd^4x\left[\varpi_I\dot{\varphi}^I-a^3N_\IR\left(\frac{1}{2a^6}G^{IJ}\varpi_I\varpi_J+V+\frac{3\Mpl^2\calH^2}{N_\IR^2}\right)\right], \label{eq: S0} \\
+	S^{(1)}=&\int\dd^4x\left[P_I\left(\dot{\varphi}^I-\frac{N_\IR}{a^3}G^{IJ}\varpi_J\right)
+	-Q^I\left(\dot{\varpi}_I+\frac{N_\IR}{2a^3}G^{JK}{}_{,I}\varpi_J\varpi_K+a^3N_\IR V_I\right) \right. \nonumber \\
+	&\left.-a^3\alpha\left(\frac{1}{2a^6}G^{IJ}\varpi_I\varpi_J+V-\frac{3\Mpl^2\calH^2}{N_\IR^2}\right)\right], \label{eq: S1} \\
+	S^{(2)}=&\int\dd^4x\left[-\frac{3\Mpl^2\calH^2a^3}{N_\IR^3}\alpha^2
+	-a^3\alpha\left(\frac{1}{a^6}G^{IJ}\varpi_IP_J+\frac{1}{2a^6}G^{IJ}{}_{,K}Q^K\varpi_I\varpi_J+V_IQ^I
+	+\frac{2\Mpl^2\calH}{N_\IR^2}\frac{\nabla^2}{a^2}\psi\right) \right. \nonumber \\
+	&\left. +\varpi_IQ^I\frac{\nabla^2}{a^2}\psi-a^3N_\IR\left(\frac{1}{2a^6}G^{IJ}P_IP_J+\frac{1}{a^6}G^{IJ}{}_{,K}Q^K\varpi_IP_J
+	+\frac{1}{4a^6}G^{IJ}{}_{,KL}\varpi_I\varpi_JQ^KQ^L \right.\right. \nonumber \\
+	&\left.\left. -\frac{1}{2}G_{IJ}Q^I\frac{\nabla^2}{a^2}Q^J+\frac{1}{2}V_{IJ}Q^IQ^J\right)+P_I\dot{Q}^I\right]. \label{eq: S2}
+}
+Note that if one neglects the UV modes and consider only $S^{(0)}$, its variation (formally equivalent to the coefficient of $Q^I$, $P_I$, and $\alpha$
+in $S^{(1)}$) reproduces the classical EoM~(\ref{eq: classical EoM}) as
+\bae{\label{eq: classical IR EoM}
+	\dot{\varphi}^I\approx\frac{N_\IR}{a^3}G^{IJ}\varpi_J, \quad\quad
+	D_t\varpi_I\approx-a^3N_\IR V_I, \quad\quad
+	\frac{3\Mpl^2\calH^2}{N_\IR^2}\approx\frac{1}{2a^6}G^{IJ}\varpi_I\varpi_J+V,
+}
+which hold only if the noise terms are neglected. Actually it will be shown that the last Friedmann equation does hold even under the existence 
+of noise.
+
+Here let us mention that this action can be covariantized as
+\bae{
+	S^{(0)}=&\int\dd^4x\left[\varpi_I\dot{\varphi}^I-a^3N_\IR\left(\frac{1}{2a^6}\varpi_I\varpi^I+V+\frac{3\Mpl^2\calH^2}{N_\IR^2}\right)\right], \\
+	S^{(1)}=&\int\dd^4x\left[\tilde{P}_I\left(\dot{\varphi}^I-\frac{N_\IR}{a^3}\varpi^I\right)-Q^I\left(D_t\varpi_I+a^3N_\IR V_I\right) \right. \nonumber \\
+	&\left.-a^3\alpha\left(\frac{1}{2a^6}\varpi_I\varpi^I+V-\frac{3\Mpl^2\calH^2}{N_\IR^2}\right)\right], \\
+	S^{(2)}=&\int\dd^4x\left[-\frac{3\Mpl^2\calH^2a^3}{N_\IR^3}\alpha^2-a^3\alpha\left(\frac{1}{a^6}\varpi_I\tilde{P}^I+V_IQ^I
+	+\frac{2\Mpl^2\calH}{N_\IR^2}\frac{\nabla^2}{a^2}\psi\right)+\varpi_IQ^I\frac{\nabla^2}{a^2}\psi \right. \nonumber \\
+	&\left.-a^3N_\IR\left(\frac{1}{2a^6}\tilde{P}_I\tilde{P}^I-\frac{1}{2}Q_I\frac{\nabla^2}{a^2}Q^I+\frac{1}{2}V_{I;J}Q^IQ^J-
+	\frac{1}{2a^6}R_I{}^{JK}{}_L\varpi_J\varpi_KQ^IQ^L\right)
+	+\tilde{P}_ID_tQ^I\right], \label{eq: S2 cov}
+}
+where
+\bae{
+	\tilde{P}_I=P_I-\Gamma^K_{IJ}\varpi_KQ^J,
+}
+and $R_{IJKL}$ is a Riemann tensor corresponding with the field space metric $G_{IJ}$.
+Also $D_t$ and a semicolon represent the covariant derivatives defined by
+\bae{
+	D_t\varpi_I=\dot{\varpi}_I-\Gamma^K_{IJ}\dot{\varphi}^J\varpi_K, \quad\quad D_tQ^I=\dot{Q}^I+\Gamma^I_{JK}\dot{\varphi}^JQ^K,
+	\quad\quad V_{I;J}=\partial_JV_I-\Gamma^K_{IJ}V_K.
+}
+Field space indices $I$, $J$, and so on are raised and lowered by $G_{IJ}$.
+The introduction of $\tilde{P}_I$ means that the original $P_I$ is not transformed as a vector since it is related with a non-vector $\dot{Q}_I$, 
+but instead $\tilde{P}_I=\delta S^{(2)}/\delta (D_tQ^I)$ is a correct vector. 
+Note that one has to use the classical EoM~(\ref{eq: classical IR EoM}) to derive the expression
+of $S^{(2)}$. This EoM holds only up to noise as we mentioned, 
+but the noise term itself comes from the UV modes and therefore the difference will be the cubic order
+in the UV modes which can be neglected here.
+Rather than this covariant action, the following calculations are based on the original action~(\ref{eq: S0})--(\ref{eq: S2}) because they contain less time derivatives and therefore the calculations will be clearer without subtleties.
+However, after covariantizing the final expressions, the correct vector $\tilde{P}_I$ will appear instead of $P_I$.
+
+As we mentioned in the previous section, 
+the strong point of the ADM formalism is that the metric components $N$ and $\beta$ appear as mere Lagrangian multipliers in the action.
+Therefore they can be integrated out in advance, which is equivalent
+to substituting the solutions of the corresponding Euler-Lagrange constraints.
+In fact one needs only the momentum constraint
+\bae{\label{eq: alpha}
+	\var{S}{\psi}=0, \quad \Leftrightarrow \quad \alpha=\frac{N_\IR^2} {2\Mpl^2\calH a^3}\varpi_IQ^I,
+}
+and then both $\alpha$ and $\psi$ can be eliminated. Also we define the IR and UV modes orthogonally so that 
+the integral of IR and UV parts of some variables vanishes:\footnote{If an integral includes two or more than two IR operators like as 
+$\int\dd^4x\,\varphi\varphi Q$, the convolution between the multiple IR operators may lead to the short wavelength mode and the integral does not vanish.
+In this paper, we neglect these mode coupling terms for simplicity to see only the effect of the horizon crossing of UV modes.
+We keep the terms with two UV modes. \label{footnote: orthogonal}}
+\bae{
+	\int\dd^4x\,\calO_\IR(x)\scrO_\UV(x)=0.
+}
+Then almost all terms in $S^{(1)}$ can be dropped except for time-derivative terms. The IR and UV modes can be assumed to be coupled 
+through the time derivative of the window function and indeed it is nothing but the source of the noise for IR modes.
+Finally the considered action can be summarized as%\footnote{Note that we omit the term $\Gamma^K_{IJ}\dot{\varphi}^IQ^J\varpi_K$
+%even though it includes a time derivative because there is a non-derivative IR part $\Gamma^K_{IJ}\varpi_K$ and then the group of
+%$\Gamma^K_{IJ}\dot{\varphi}^I\varpi_K$ can be also interpreted as an IR part similarly to the assumption in footnote~\ref{footnote: orthogonal}.}
+\bae{\label{eq: quadratic action}
+	S\simeq S^{(0)}+\int\dd^4x\left[-\varphi_{\bar{X}I}\dot{Q}_{X}^I+\frac{1}{2}Q_{X}^I\Lambda_{XYIJ}Q_Y^J\right].
+}
+Here we introduced $X$ and $Y$ indices taking $Q$ or $P$ as
+\bae{
+	Q_Q^I=Q^I, \quad\quad Q_{P}^I=P_I.
+}
+Also bar indices $\bar{X}$ and $\bar{Y}$ are defined by
+\bae{
+	\varphi_{\bar{Q}I}=-\varpi_I, \quad\quad \varphi_{\bar{P}I}=\varphi^I.
+}
+The concrete expression of $\Lambda$ is given in Sec.~\ref{sec: UV EoM}.
+Note that the position of $I$ and $J$ is taken so as to correspond with $Q$
+in the $XY$ notation, but it is implicitly taken correctly also for $P$-components
+(e.g. $\Lambda_{XYIJ}=(\Lambda_{QQIJ},\Lambda_{QPI}{}^J,\Lambda_{QP}{}^I{}_J,\Lambda_{PP}{}^{IJ})$).
+
+
+
+
+\subsection{Effective action}
+
+Now let us formulate the path integral for the in-in vacuum expectation values described by the action~(\ref{eq: quadratic action}).
+Though the calculation of the scattering process, that is, the expectation value between the in- and out-state is quite common,
+what we want now is that between the in- and in-state. In such a situation, one generally considers the problem after reducing it to
+that of the scattering process.
+In other words, one can interpret the in-in one as the scattering process on the closed time path from the in- to out- and then in-state again.
+The partition function is then calculated on the closed time path $C=C^++C^-$ as
+\bae{
+	Z[\calJ_{XI},\scrJ_{XI}]&=\calN\int_C\scrD\varphi_X^I\scrD Q_X^I\ee^{i\left[S+\int\dd^4x\left(\calJ_{XI}\varphi_X^I+\scrJ_{XI}Q_X^I\right)\right]},
+}
+where $C^+$ and $C^-$ are the time paths from the in- to out-state and from the out- to in-state respectively.
+$\mathcal{N}$ formally denotes the field independent normalization factor which does not necessarily take the same value
+in differential equations.
+If one expresses the field on $C^{+/-}$ as $\varphi_X^{I+/-}$ and $Q_X^{I+/-}$, the partition function can be simplified to the standard 
+scattering process with doubled d.o.f. as
+\bae{
+	&Z[\calJ_{XI}^\pm,\scrJ_{XI}^\pm]=\calN\int_{t=-\infty\to\infty}\scrD\varphi_X^{I\pm}\scrD Q_X^{I\pm} \nonumber \\
+	&\times\exp\left[S[\varphi_X^{I+},Q_X^{I+}]
+	-S[\varphi_X^{I-},Q_X^{I-}]+\int\dd^4x\left(\calJ_{XI}^+\varphi_X^{I+}+\scrJ_{XI}^+Q_X^{I+}-\calJ_{XI}^-\varphi_X^{I-}
+	-\scrJ_{XI}^-Q_X^{I-}\right)\right].
+}
+Introducing the matrix derivative operator
+\bae{
+	\tilde{\Lambda}_{XYIJab}(x,y)=\bpme{
+		\Lambda_{XYIJ}(\varphi^+(x),\varpi^+(x)) & 0 \\
+		0 & -\Lambda_{XYIJ}(\varphi^-(x),\varpi^-(x))
+	}\delta^{(4)}(x-y),
+}
+one can write
+\bae{\label{eq: quadratic Z}
+	Z[\calJ_{XIa},\scrJ_{XIa}]\simeq&\,\calN\int\scrD\varphi_X^{Ia}\ee^{i(S^{(0)+}-S^{(0)-}+\int\dd^4x\calJ_{XIa}\varphi_X^{Ia})} \nonumber \\
+	&\times\int\scrD Q_X^{Ia}\exp\left[i\int\dd^4x\left(-\varphi_{\bar{X}Ia}\dot{Q}_{X}^{Ia}+\frac{1}{2}Q_{X}^{Ia}\tilde{\Lambda}_{XYIJab}Q_X^{Jb}
+	+\scrJ_{XIa}Q_X^{Ia}\right)\right].
+}
+Here indices $a$ and $b$ running over $+$ and $-$ are raised and lowered by a two-dimensional metric $\sigma_{3ab}=\sigma_3^{ab}=\diag(1,-1)$.
+
+Now let us consider the role of $\varphi_{\bar{X}Ia}\dot{Q}_{X}^{Ia}$ term. In the definition with the window function as the previous section,
+$\dot{Q}$ includes a time derivative of the window function and it is expected to represent the effect of the horizon crossing of UV modes.
+Since $\dot{W}(k/\sigma aH)=-\delta(t-t_\sigma(k))$ where the mode $k$ crosses the cutoff scale $\sigma aH$ at $t_\sigma(k)$,
+this term can be interpreted as the delta-function coupling:
+\bae{\label{eq: IR-UV coupling}
+	-\int\dd^4x\varphi_{\bar{X}Ia}(t,\mathbf{x})\dot{Q}_{X}^{Ia}(t,\mathbf{x})\to
+	\int\dd t\int\dk\delta(t-t_\sigma(k))\varphi_{\bar{X}Ia}(t,\mathbf{k})Q_{X}^{Ia}(t,-\mathbf{k}).
+}
+If one moves to the useful Keldysh basis (we will mention its meaning later) defined by
+\bae{\label{eq: Keldysh}
+	\bpme{
+		\bar{\varphi}_X^I \\
+		\varphi_X^{I\Delta}
+	}=\bpme{
+		1/2 & 1/2 \\
+		1 & -1
+	}\bpme{
+		\varphi_X^{I+} \\
+		\varphi_X^{I-}
+	}, \quad \Leftrightarrow \quad
+	\bpme{
+		\varphi_X^{I+} \\
+		\varphi_X^{I-}
+	}=\bpme{
+		1 & 1/2 \\
+		1 & -1/2
+	}\bpme{
+		\bar{\varphi}_X^I \\
+		\varphi_X^{I\Delta}
+	},
+}
+it can be expressed by two parts as
+\bae{\label{eq: IR-UV in Keldysh}
+	\int\dd t\int\dk\delta(t-t_\sigma(k))\varphi_{\bar{X}Ia}Q_{X}^{Ia}=
+	\int\dd t\int\dk\delta(t-t_\sigma(k))\left(\varphi_{\bar{X}I}^{\Delta}\bar{Q}_{X}^I+\bar{\varphi}_{\bar{X}I}Q_{X}^{I\Delta}\right).
+}
+However the latter part causes hateful dissipation and mass renormalization terms as we will see. 
+It alters IR propagators even in the free test field case.
+These terms had been simply neglected in the literature~\cite{Morikawa:1989xz,Matarrese:2003ye,Levasseur:2013ffa}, assumed to be small.
+But in fact their effects are as large as those of the noise terms and therefore they cannot be neglected at the perturbation order.
+Recently Moss and Rigopoulos~\cite{Moss:2016uix} casted a doubt 
+that simple decomposition of fields and integration measures could recover the original theory
+when the window is time-dependent. Also Tokuda and Tanaka claimed in their paper~\cite{Tokuda:2017fdh} that
+the IR-UV coupling should be determined to reproduce the original propagator rather than derived by the straightforward decomposition.
+Following them, we will omit the latter term by hand. For a while we just introduce a fictitious coefficient $\epsilon$ and keep it to see
+its effect, that is, we adopt the following IR-UV coupling:
+\bae{
+	\int\dd t\int\dk\delta(t-t_\sigma(k))\left(\varphi_{\bar{X}I}^{\Delta}\bar{Q}_{X}^I+\epsilon \bar{\varphi}_{\bar{X}I}Q_{X}^{I\Delta}\right)
+	&=\int\dd t\int\dk\delta(t-t_\sigma(k))\varphi_{\bar{X}Ia}A^a{}_bQ_{X}^{Jb} \nonumber \\
+	&=:\int\dd^4x\tilde{\varphi}_{\bar{X}Ia}Q_{X}^{Ia}
+}
+where
+\bae{
+	A^a{}_b=\frac{1}{2}\left[\bpme{
+		1 & -1 \\
+		-1 & 1	
+	}+\epsilon\bpme{
+		1 & 1 \\
+		1 & 1
+	}\right], \quad\quad \tilde{\varphi}_{\bar{X}Ia}=\int\dk\ee^{-i\mathbf{k}\cdot{\mathbf{x}}}\delta(t-t_\sigma)\varphi_{\bar{X}Ib}A^b{}_a.
+}
+
+The partition function~(\ref{eq: quadratic Z}) is quadratic in $Q$. Therefore it can be easily integrated over $Q$, giving rise to
+\bae{
+	Z[\calJ_{XIa},\scrJ_{XIa}]=&\,\calN\int\scrD\varphi_X^{Ia}\ee^{i(S^{(0)+}-S^{(0)-}+\int\dd^4x\calJ_{XIa}\varphi_X^{Ia})} \nonumber \\
+	&\times\exp\left[-\frac{i}{2}\int\dd^4x\dd^4x^\prime
+	\left(\tilde{\varphi}_{\bar{X}Ia}+\scrJ_{XIa}\right)(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}\left(\tilde{\varphi}_{\bar{Y}Jb}+\scrJ_{YJb}\right)\right].
+}
+Finally we make a key assumption that the IR modes are well classicalized so that the integration with respect to $\varphi$ simply leads to
+the replacement of $\varphi$ to its vacuum expectation value (vev) $\braket{\varphi}_\calJ$ under the existence of the source term $\calJ$.
+$\braket{\varphi}_\calJ$ includes all quantum effects and therefore its dynamics will be written by the Langevin equation that we want.
+The partition function after the field integration reads
+\bae{\label{eq: Z after integration}
+	Z[\calJ_{XIa},\scrJ_{XIa}]\simeq&\,\calN\exp\left[i\left(S^{(0)}[\braket{\varphi_X^{I+}}_\calJ]-S^{(0)}[\braket{\varphi_X^{I-}}_\calJ]
+	+\int\dd^4x\calJ_{XIa}\braket{\varphi_X^{Ia}}_\calJ \right.\right. \nonumber \\
+	&\left.\left. -\frac{1}{2}\int\dd^4x\dd^4x^\prime
+	\left(\braket{\tilde{\varphi}_{\bar{X}Ia}}_\calJ+\scrJ_{XIa}\right)(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}
+	\left(\braket{\tilde{\varphi}_{\bar{Y}Jb}}_\calJ+\scrJ_{YJb}\right) 
+	\right)\right] \nonumber \\
+	=:&\,\calN\ee^{iW[\calJ_{XIa},\scrJ_{XIa}]}.
+}
+Then the effective action $\Gamma$ is given by the Legendre transformation of $W$ as
+\bae{
+	\Gamma[\braket{\varphi_X^{Ia}},\braket{Q_X^{Ia}}]=W[\calJ_{XIa},\scrJ_{XIa}]-\calJ_{XIa}\braket{\varphi_X^{Ia}}-\scrJ_{XIa}\braket{Q_X^{Ia}}.
+}
+Here the field vev and the source term are related by
+\bae{
+	\braket{\varphi_X^{Ia}}=\var{W}{\calJ_{XIa}}, \quad\quad \braket{Q_X^{Ia}}=\var{W}{\scrJ_{XIa}}=-\int\dd^4x^\prime
+	(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}
+	(\braket{\tilde{\varphi}_{\bar{Y}Jb}}_\calJ+\scrJ_{YJb}).
+}
+Therefore, by substituting inverse solutions for $\scrJ$, the explicit form of the effective action reads
+\bae{
+	\Gamma[\braket{\varphi_X^{Ia}},\braket{Q_X^{Ia}}]=S^{(0)+}-S^{(0)-}+\frac{1}{2}\int\dd^4x\dd^4x^\prime\braket{Q_X^{Ia}}
+	\tilde{\Lambda}_{XYIJab}\braket{Q_Y^{Jb}}+\int\dd^4x\braket{\tilde{\varphi}_{\bar{X}Ia}}\braket{Q_X^{Ia}}.
+}
+The vev of $Q$ can be solved as a stationary point of the effective action:
+\bae{
+	\var{\Gamma}{\braket{Q_X^{Ia}}}=0, \quad \Leftrightarrow \quad
+	\braket{Q_X^{Ia}}=-\int\dd^4x^\prime(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}\braket{\tilde{\varphi}_{\bar{X}Jb}}.
+}
+Substituting it back into the effective action, one finally obtains the effective action for IR modes as
+\bae{\label{eq: GammaIR}
+	\Gamma_\IR[\braket{\varphi_X^{Ia}}]=S^{(0)+}-S^{(0)-}-\frac{1}{2}\int\dd^4x\dd^4x^\prime
+	\braket{\tilde{\varphi}_{\bar{X}Ia}}(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}
+	\braket{\tilde{\varphi}_{\bar{Y}Jb}}.
+}
+Particularly the last term $\SIA=-\frac{1}{2}\int\dd^4x\dd^4x^\prime
+\braket{\tilde{\varphi}_{\bar{X}Ia}}(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}\braket{\tilde{\varphi}_{\bar{Y}Jb}}$
+is called \emph{influence action}, which includes the effect of the horizon-exiting UV modes.
+We will omit brackets hereafter for conciseness.
+
+
+
+
+
+\subsection{Influence action}\label{sec: influence action}
+
+In the influence action, $\tilde{\Lambda}^{-1}$ has not been clarified yet. By taking the variation of the partition function~(\ref{eq: Z after integration}),
+one finds that $\tilde{\Lambda}^{-1}$ is indeed nothing but the time-ordered two point function of $Q$ as
+\bae{
+	\braket{T_C\hat{Q}_X^{Ia}(x)\hat{Q}_Y^{Jb}(x^\prime)}
+	=\left.\frac{1}{i}\var{}{\scrJ_{XIa}(x)}\frac{1}{i}\var{}{\scrJ_{YJb}(x^\prime)}Z\right|_{\calJ=\scrJ=0}
+	=i(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}(x,x^\prime).
+}
+Here the time ordering should be defined along with the closed time path $C$, that is,
+\bae{
+	T_C\hat{Q}_{X}^{Ia}(x)\hat{Q}_Y^{Jb}(x^\prime)=
+	\bce{
+		\dps
+		\theta(t-t^\prime)\hat{Q}_{X}^{Ia}(x)\hat{Q}_Y^{Jb}(x^\prime)+\theta(t^\prime-t)\hat{Q}_Y^{Jb}(x^\prime)\hat{Q}_X^{Ia}(x), & (a=+,\,b=+), \\
+		\dps
+		\hat{Q}_Y^{Jb}(x^\prime)\hat{Q}_X^{Ia}(x), & (a=+,\,b=-), \\
+		\dps
+		\hat{Q}_X^{Ia}(x)\hat{Q}_Y^{Jb}(x^\prime), & (a=-,\,b=+), \\
+		\dps
+		\theta(t^\prime-t)\hat{Q}_{X}^{Ia}(x)\hat{Q}_Y^{Jb}(x^\prime)+\theta(t-t^\prime)\hat{Q}_Y^{Jb}(x^\prime)\hat{Q}_X^{Ia}(x), & (a=-,\,b=-).
+	}
+}
+The field operator $\hat{Q}_X^{Ia}$ can be expanded as
+\bae{\label{eq: mode expansion}
+	\hat{Q}_X^{Ia}(x)=\int\dk\left[Q_{X\alpha}^{Ia}(t,k)\hat{a}_\alpha(\mathbf{k})\ee^{i\mathbf{k}\cdot\mathbf{x}}
+	+Q_{X\alpha}^{*Ia}(t,k)\hat{a}^\dagger_\alpha(\mathbf{k})\ee^{-i\mathbf{k}\cdot\mathbf{x}}\right],
+}
+with the annihilation-creation operators
+\bae{\label{eq: aadagger}
+	[\hat{a}_\alpha(\mathbf{k}),\hat{a}^\dagger_\beta(\mathbf{q})]=(2\pi)^3\delta_{\alpha\beta}\delta^{(3)}(\mathbf{k}-\mathbf{q}).
+}
+Here indices $\alpha$ and $\beta$ take as many values as the field index $I$. The mode function $Q_{X\alpha}^{Ia}(t,k)$ can be given by
+the solution $Q_{X\alpha}^I(t,k)$ of the UV EoM as $Q_{X\alpha}^{I+}=Q_{X\alpha}^{I-}=Q_{X\alpha}^I$.\footnote{Since
+the coefficients $\calH$, $V_{IJ}$, and so on in the EoM depend on the background IR mode $\varphi_X^{I\pm}$,
+the solutions $Q_{X\alpha}^{I+}$ and $Q_{X\alpha}^{I-}$ are generally different. However we will consider the IR EoM at 
+$\varphi_X^{I+}=\varphi_X^{I-}$ and therefore these two solutions can be given by the same $Q_{X\alpha}^I$.}
+Then with use of the mode function, the propagator $\tilde{\Lambda}^{-1}$ can be written as
+\bae{
+	&(\tilde{\Lambda}^{-1})_{XY}{}^{IJab}(x,x^\prime)=-i\braket{T_C\hat{Q}_X^{Ia}(x)\hat{Q}_Y^{Jb}(x^\prime)} \nonumber \\
+	&=\int\dk\bpme{
+		\begin{array}{c}
+			\theta(t-t^\prime)Q_{X\alpha}^I(t,k)Q^{*J}_{Y\alpha}(t^\prime,k)\ee^{i\mathbf{k}\cdot(\mathbf{x}-\mathbf{x}^\prime)} \\
+			+\theta(t^\prime-t)Q_{Y\alpha}^J(t^\prime,k)Q_{X\alpha}^{*I}(t,k)\ee^{i\mathbf{k}\cdot(\mathbf{x}^\prime-\mathbf{x})}
+		\end{array}
+		& Q^J_{Y\alpha}(t^\prime,k)Q_{X\alpha}^{*I}(t,k)\ee^{i\mathbf{k}\cdot(\mathbf{x}^\prime-\mathbf{x})} \\
+		Q_{X\alpha}^I(t,k)Q^{*J}_{Y\alpha}(t^\prime,k)\ee^{i\mathbf{k}\cdot(\mathbf{x}-\mathbf{x}^\prime)} &
+		\begin{array}{c}
+			\theta(t^\prime-t)Q_{X\alpha}^I(t,k)Q^{*J}_{Y\alpha}(t^\prime,k)\ee^{i\mathbf{k}\cdot(\mathbf{x}-\mathbf{x}^\prime)} \\
+			+\theta(t-t^\prime)Q^J_{Y\alpha}(t^\prime,k)Q_{X\alpha}^{*I}(t,k)\ee^{i\mathbf{k}\cdot(\mathbf{x}^\prime-\mathbf{x})}
+		\end{array}
+	}
+}
+
+Then, moving to the Keldysh basis~(\ref{eq: Keldysh}), one can summarize the influence action as
+\bae{\label{eq: SIA}
+	\SIA=&\frac{i}{2}\int\dd^4x\dd^4x^\prime\varphi_{\bar{X}I}^\Delta(x)\Re[\Pi_{XY}{}^{IJ}(x,x^\prime)]\varphi_{\bar{Y}J}^{\Delta}(x^\prime) \nonumber \\
+	&-2\epsilon\int\dd^4x\dd^4x^\prime\theta(t-t^\prime)\varphi_{\bar{X}I}^\Delta(x)\Im[\Pi_{XY}{}^{IJ}(x,x^\prime)]\bar{\varphi}_{\bar{Y}J}(x^\prime),
+}
+where
+\bae{
+	\Pi_{XY}{}^{IJ}(x,x^\prime)&=\int\dk\ee^{i\mathbf{k}\cdot(\mathbf{x}-\mathbf{x}^\prime)}\delta(t-t_\sigma)\delta(t^\prime-t_\sigma)
+	Q_{X\alpha}^I(t,k)Q^{*J}_{Y\alpha}(t^\prime,k) \nonumber \\
+	&=\frac{\dot{k}_\sigma}{k_\sigma}\frac{\sin k_\sigma r}{k_\sigma r}\calP_{XY}{}^{IJ}(k_\sigma)\delta(t-t^\prime),
+}
+with
+\bae{\label{eq: calP}
+	\calP_{XY}{}^{IJ}(k)=\frac{k^3}{2\pi^2}Q_{X\alpha}^I(k)Q_{Y\alpha}^{*J}(k).
+}
+The first term yields the noise term as we will see and the second term gives the hateful dissipation and mass renormalization which should be
+removed.
+
+
+\subsection{Langevin equation}
+
+Hereafter we basically assume $\epsilon=0$.
+Let us first discuss the meaning of the Keldysh basis. According to the classicality assumption, we are interested in the dynamics of
+the vacuum expectation value $\braket{\varphi^+}=\braket{\varphi^-}$, which is given by $\braket{\bar{\varphi}}$ in the Keldysh basis.
+Then the other mode $\varphi^\Delta$ represents the deviation from this trajectory.
+Therefore the EoM for $\bar{\varphi}$ can be obtained by the variation of the effective action in $\varphi^\Delta$ at the condition $\varphi^\Delta=0$.
+However the influence action~(\ref{eq: SIA}) is quadratic in $\varphi^\Delta$, and hence it does not contribute to the EoM.
+Accordingly the variation of the effective action~(\ref{eq: GammaIR}) is merely equal to the classical EoM~(\ref{eq: classical IR EoM}).
+It can be interpreted as the fact that taking average of the Langevin equation reduces it to the classical EoM since the mean value of noise is 
+zero.\footnote{Strictly speaking, if the non-linearity of $\varphi$ is significant in the EoM, the simple average of the Langevin equation itself is not
+reduced to the classical EoM as an important feature of the stochastic formalism. In this case, deriving EoM directly from 
+the complex effective action~(\ref{eq: GammaIR}) leads to a wrong result.}
+
+The key point is that the influence action is quadratic and pure imaginary. Therefore the probability weight in the partition function
+$\ee^{i\SIA}$ would be Gaussian, suggesting the Gaussian auxiliary field introduced by its functional Fourier transformation~\cite{Caldeira:1982iu,Grabert:1988yt}
+\bae{\label{eq: functional Fourier trs}
+	\ee^{i\SIA}=\calN\int\scrD\xi_X^IP[\xi_X^I]\ee^{i\int\dd^4x\varphi_{\bar{X}I}^\Delta\xi_X^I},
+}
+where
+\bae{
+	P[\xi_X^I]=\calN\exp\left[-\frac{1}{2}\int\dd^4x\dd^4x^\prime\xi_{X}^I(x)(\Re\Pi^{-1})_{XYIJ}(x,x^\prime)\xi_Y^J(x^\prime)\right].
+}
+The Gaussian weight $P[\xi_X^I]$ determines the statistical properties of $\xi$ as
+\bae{
+	\bce{
+		\dps
+		\braket{\xi_X^I(x)}=\int\scrD\xi_X^I\,\xi_X^I(x)P[\xi_X^I]=0, \\[10pt]
+		\dps
+		\braket{\xi_X^I(x)\xi_{Y}^J(x^\prime)}=\int\scrD\xi_X^I\,\xi_X^I(x)\xi_{Y}^J(x^\prime)P[\xi_X^I]=\Re\Pi_{XY}{}^{IJ}(x,x^\prime),
+	}
+}
+and the other part in Eq.~(\ref{eq: functional Fourier trs}) can be interpreted as a new coupling between $\varphi$ and $\xi$ 
+in the effective action.
+After this transformation, the effective action reads pure real as
+\bae{\label{eq: Seff}
+	S_\eff=S^{(0)+}-S^{(0)-}+\int\dd^4x\varphi_{\bar{X}I}^\Delta\xi_X^I.
+}
+%\bae{\label{eq: Seff}
+%	S_\eff=S^{(0)+}-S^{(0)-}+\int\dd^4x\varphi_{\bar{X}I}^\Delta\xi_X^I
+%	-2\epsilon\int\dd^4x\dd^4x^\prime\theta(t-t^\prime)\varphi_{\bar{X}I}^\Delta(x)\Im[\Pi_{XY}{}^I{}_J(x,x^\prime)]\bar{\varphi}_{\bar{Y}}^{J}(x^\prime)
+%}
+Finally the variation of this real effective action in $\varphi^\Delta$ at $\varphi^\Delta=0$ gives a set of Langevin equations, which can be covariantized as
+\bae{\label{eq: covariant Langevin}
+	&\left.\var{S_\eff}{\varpi_I^\Delta}\right|_{\varphi^\Delta=0}=0, \quad\quad \left.\var{S_\eff}{\varphi^{I\Delta}}\right|_{\varphi^\Delta=0}=0, \nonumber \\
+    &\Leftrightarrow \quad \dot{\bar{\varphi}}^I=\frac{N_\IR}{a^3}G^{IJ}\bar{\varpi}_J+\xi_Q^I, \quad\quad D_t\bar{\varpi}_I=-a^3N_\IR V_I+\xi_{\tilde{P}I},
+}
+consistently with the heuristic approach~(\ref{eq: Langevin in heuristic})
+
+If one includes the second term of the influence action~(\ref{eq: SIA}), it yields additional dissipation and mass renormalization terms proportional to
+$\bar{\varphi}$ and $\bar{\varpi}$, which is inconsistent with the original theory even in the test particle limit.
+That is why one must get rid of the latter term in the IR-UV coupling~(\ref{eq: IR-UV in Keldysh}).
+Also note that the influence action does not depends on $N_\IR$ explicitly. 
+Therefore the Friedmann constraint corresponding with the variation in $N_\IR$
+\bae{\label{eq: Friedmann eq}
+	\left.\var{S_\eff}{N_\IR^\Delta}\right|_{\varphi^\Delta=0}=0, \quad \Leftrightarrow \quad 
+	\frac{3\Mpl^2\calH^2}{N_\IR^2}=\frac{1}{2a^6}G^{IJ}\bar{\varpi}_I\bar{\varpi}_J+V,
+}
+still holds in each Hubble patch in the stochastic formalism as we saw in Eq.~(\ref{eq: perturbation energy const}).
+In the rest of this paper, we will omit bars of $\bar{\varphi}$ and $\bar{\varpi}$ for conciseness.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+Let us check the consistency of the obtained Langevin equation in the free test fields case. That is, here we assume $V\simeq\text{const.}$,
+$G^{IJ}\varpi_I\varpi_J/2a^6\ll V$, and $G_{IJ}=\delta_{IJ}$. In this case, the solution for the mode function is given by
+\bae{
+	Q^I_\alpha=\frac{1}{\sqrt{2k}a}\left(1-\frac{i}{k\eta}\right)\ee^{-ik\eta}\delta^I_\alpha.
+}
+By adopting the e-folding number $N$ for a time variable, i.e. $N_\IR=1/H$, the Langevin equation can be written as
+\bae{
+	\dif{\varphi^I}{N}=\tilde{\varpi}_I+\xi_Q^I, \quad\quad
+	\dif{\tilde{\varpi}_I}{N}=-3H\tilde{\varpi}_I+\tilde{\xi}_{PI},
+}
+where $\tilde{\varpi}_I=\varpi_I/a^3H$ and $\tilde{\xi}_{PI}=\xi_{PI}/a^3H$.
+The noise amplitude is 
+\bae{
+	\braket{\xi_Q^I(x)\xi_Q^J(x^\prime)}=\left(\frac{H}{2\pi}\right)^2\delta^{IJ}\delta(N-N^\prime)\frac{\sin k_\sigma r}{k_\sigma r}
+	+\calO(\sigma^2),
+}
+and all the other combinations are suppressed as $\calO(\sigma^2)$.
+Therefore the system is rapidly settled down to the attractor trajectory as $\tilde{\varpi}_I\to0$
+and the inflaton field values are given by simple Brownian motions:
+\bae{
+	\varphi^I(N,\mathbf{x})=\int^N_{N_0}\xi_Q^I(N^\prime,\mathbf{x})\dd N^\prime,
+}
+where $N_0$ is some initial time.
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+
+\section{Simple example}\label{sec: example}
+
+\subsection{Free test particle}
+
+Let us check the consistency of the obtained Langevin equation in the free test fields case. That is, here we assume $V\simeq\text{const.}$,
+$G^{IJ}\varpi_I\varpi_J/2a^6\ll V$, and $G_{IJ}=\delta_{IJ}$. In this case, the solution for the mode function is given by
+\bae{
+	Q^I_\alpha=\frac{1}{\sqrt{2k}a}\left(1-\frac{i}{k\eta}\right)\ee^{-ik\eta}\delta^I_\alpha.
+}
+By adopting the e-folding number $N$ for a time variable, i.e. $N_\IR=1/H$, the Langevin equation can be written as
+\bae{
+	\dif{\varphi^I}{N}=\tilde{\varpi}_I+\xi_Q^I, \quad\quad
+	\dif{\tilde{\varpi}_I}{N}=-3H\tilde{\varpi}_I+\tilde{\xi}_{PI},
+}
+where $\tilde{\varpi}_I=\varpi_I/a^3H$ and $\tilde{\xi}_{PI}=\xi_{PI}/a^3H$.
+The noise amplitude is 
+\bae{
+	\braket{\xi_Q^I(x)\xi_Q^J(x^\prime)}=\left(\frac{H}{2\pi}\right)^2\delta^{IJ}\delta(N-N^\prime)\frac{\sin k_\sigma r}{k_\sigma r}
+	+\calO(\sigma^2),
+}
+and all the other combinations are suppressed as $\calO(\sigma^2)$.
+Therefore the system is rapidly settled down to the attractor trajectory as $\tilde{\varpi}_I\to0$
+and the inflaton field values are given by simple Brownian motions:
+\bae{
+	\varphi^I(N,\mathbf{x})=\int^N_{N_0}\xi_Q^I(N^\prime,\mathbf{x})\dd N^\prime,
+}
+where $N_0$ is some initial time.
+
+
+\subsection{Cartesian vs. polar coordinate}
+
+As an exercise of the coordinate transformation, let us study the canonical two-field model:
+\bae{
+	S=\int\dd^4x\sqrt{-g}\left[\frac{1}{2}\Mpl^2\calR-\frac{1}{2}\partial_\mu X\partial^\mu X-\frac{1}{2}\partial_\mu Y\partial^\mu Y
+	-\frac{1}{2}M^2X^2-\frac{1}{2}m^2Y^2\right],
+}
+in the polar coordinate as
+\bae{
+	\phi^r=r=\sqrt{X^2+Y^2}, \quad\quad \phi^\theta=\theta=\tan^{-1}\frac{Y}{X}.
+}
+In this coordinate the field space metric is given by
+\bae{
+	G_{rr}=1, \quad\quad G_{\theta\theta}=r^2, \quad\quad (\text{otherwise})=0.
+}
+The corresponding affine connection is
+\bae{
+	\Gamma^r_{\theta\theta}=-r, \quad\quad \Gamma^\theta_{r\theta}=\frac{1}{r}, \quad\quad (\text{otherwise})=0.
+}
+The Riemann tensor should vanish since the original field space is flat.
+
+\end{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\section{Complementaries}\label{sec: complementaries}
+
+Even though one has a Langevin equation itself, it is not enough in order to implement the stochastic formalism practically.
+First the noise amplitude $\calP_{XY}{}^{IJ}(k_\sigma)$ should be obtained.
+It is determined by the subhorizon dynamics with an appropriate initial condition.
+We also mention the uncertainty on the mathematical prescription of noise integral.
+
+
+\subsection{Subhorizon equation of motion}\label{sec: UV EoM}
+
+While we focused on the dynamics of IR sectors, one also has to consider the UV modes to calculate the noise amplitude $\calP_{XY}{}^{IJ}$.
+In this section we discuss the linearized EoM for subhorizon modes as well as their initial condition. 
+First, by substituting the momentum constraint~(\ref{eq: alpha}) into Eq.~(\ref{eq: S2 cov}), 
+the quadratic action $S^{(2)}$ can be summarized in the matrix form as
+\bae{
+	S^{(2)}&=\int\dd^4x\frac{1}{2}Q_{X}^I\Lambda_{XYIJ}Q_Y^J, \nonumber \\
+	\bpme{
+		\Lambda_{QQIJ}, & \Lambda_{QPI}{}^J \\
+		\Lambda_{PQ}{}^I{}_J, & \Lambda_{PP}{}^{IJ}
+	}&=\bpme{
+		a^3N_\IR\left(G_{IJ}\frac{\nabla^2}{a^2}-M_{QQIJ}^2\right), & -\delta^J_ID_t-M_{PQ}^2{}^J{}_I \\
+		\delta^I_JD_t-M_{PQ}^2{}^I{}_J, & -\frac{N_\IR}{a^3}G^{IJ}
+	},
+}
+where
+\bae{
+	M^2_{QQIJ}=&V_{IJ}+\frac{N_\IR^2}{2\Mpl^2\calH a^9}G^{KL}{}_{,I}\varpi_K\varpi_L\varpi_J+\frac{1}{2a^6}G^{KL}{}_{,IJ}\varpi_K\varpi_L \nonumber \\
+    &+\frac{N_\IR}{2\Mpl^2\calH a^3}(V_I\varpi_J+V_J\varpi_I)+\frac{3}{2\Mpl^2a^6}\varpi_I\varpi_J, \\
+	M^2_{PQ}{}^I{}_J=&\frac{N_\IR^2}{2\Mpl^2\calH a^6}G^{IK}\varpi_K\varpi_J+\frac{N_\IR}{a^3}G^{IK}{}_{,J}\varpi_K.
+}
+As described in Sec.~\ref{sec: influence action}, the inverse of this $\Lambda$ operator indeed represents the propagator of the subhorizon modes.
+Therefore the EoM for UV modes are given by
+\bae{\label{eq: UV EoM}
+	\Lambda_{XYIJ}Q_Y^J=0, \quad\quad \Leftrightarrow \quad\quad 
+	\bce{
+		\dps
+		D_tQ^I\approx\frac{N_\IR}{a^3}\tilde{P}^I+\tilde{M}^2_{PQ}{}^I{}_JQ^J, \\[10pt]
+		\dps
+		D_t\tilde{P}_I\approx a^3N_\IR\left(G_{IJ}\frac{\nabla^2}{a^2}-\tilde{M}_{QQIJ}^2\right)Q^J-\tilde{M}^2_{PQI}{}^J\tilde{P}_J,
+	}
+}
+with
+\bae{
+	\tilde{M}^2_{QQ}{}^I{}_J&=V^I{}_{;J}-\frac{1}{a^6}R^{IKL}{}_J\varpi_K\varpi_L+\frac{N_\IR}{2\Mpl^2\calH a^3}(V^I\varpi_J+V_J\varpi^I)+\frac{3}{2\Mpl^2a^6}\varpi^I\varpi_J, \\
+    \tilde{M}^2_{PQ}{}^I{}_J&=\frac{N_\IR^2}{2\Mpl^2\calH a^6}\varpi^I\varpi_J.
+}
+Here we used the classical EoM~(\ref{eq: classical IR EoM}) for the right side expressions in Eq.~(\ref{eq: UV EoM}).
+It can be reduced to the well-known formula~\cite{Sasaki:1995aw},
+\bae{\label{eq: 2nd order UV EoM}
+	&\frac{1}{N_\IR^2}D_t^2Q^I+\frac{1}{N_\IR^2}\left(3\calH-\frac{\dot{N}_\IR}{N_\IR}\right)D_tQ^I \nonumber \\
+	&+\left[-\delta^I_J\frac{\nabla^2}{a^2}+V^I{}_{;J}-\frac{1}{a^6}R^{IKL}{}_J\varpi_K\varpi_L
+	-\frac{1}{a^3N_\IR\Mpl^2}D_t\left(\frac{N_\IR}{a^3\calH}\varpi^I\varpi_J\right)\right]Q^J\approx0,
+}
+with use of the time-derivative of the Friedmann equation
+\bae{ 
+	\frac{\dot{\calH}}{\calH}-\frac{\dot{N}_\IR}{N_\IR}\approx-\frac{N_\IR^2}{2\Mpl^2\calH a^6}\varpi_I\varpi^I.
+}
+Again note that the approximated equality ($\approx$) only holds up to noise. However the noise term itself comes from the UV modes
+and therefore can be neglected for the linearized UV EoM.
+One can rewrite these equations into the form exhibited in Eq.~(\ref{eq: decomposed EoM})
+\bae{
+	E_Q^I(t,\mathbf{k})=&-\dot{\phi}^I(t,\mathbf{k})+\frac{N_\IR}{a^3}G^{IJ}\pi_J(t,\mathbf{k})
+	+\frac{\alpha(t,\mathbf{k})}{a^3}G^{IJ}\varpi_J+\frac{N_\IR}{a^3}G^{IJ}{}_{,K}\varpi_J\phi^K(t,\mathbf{k})=0, \\
+	E_{PI}(t,\mathbf{k})=&-\dot{\pi}_I(t,\mathbf{k})-a^3N_\IR\phi^J(t,\mathbf{k})\partial_JV_I-a^3\alpha(t,\mathbf{k})V_I
+	-aN_\IR G_{IJ}k^2\phi^J(t,\mathbf{k})-\frac{\varpi_Ik^2}{a^2}\psi(t,\mathbf{k})
+	\nonumber \\
+	&-\frac{\alpha(t,\mathbf{k})}{2a^3}G^{JK}{}_{,I}\varpi_J\varpi_K 
+	-\frac{N_\IR}{a^3}G^{JK}{}_{,I}\varpi_J\pi_K(t,\mathbf{k})-\frac{N_\IR}{2a^3}G^{JK}{}_{,IL}\varpi_J\varpi_K\phi^L(t,\mathbf{k})=0,
+}
+with use of the energy and momentum constraints~(\ref{eq: perturbation energy const}) and (\ref{eq: alpha})
+\bae{
+	\bce{
+		\dps
+		\frac{\nabla^2}{a^2}\psi=-\frac{3\calH}{N_\IR}\alpha
+		-\frac{N_\IR^2}{2\Mpl^2\calH}\left(\frac{1}{a^6}G^{IJ}\varpi_IP_J+\frac{1}{2a^6}G^{IJ}{}_{,K}\varpi_I\varpi_JQ^K+V_IQ^I\right), \\[10pt]
+		\dps
+		\alpha=\frac{N_\IR^2}{2\Mpl^2\calH a^3}\varpi_IQ^I.
+	}
+}
+
+Here let us mention the effect of the metric perturbations.
+While metric perturbations do not affect the Langevin equation itself as we saw,
+the UV modes are affected by them in two ways. One is that they give rise to a new mixing term
+$-\frac{1}{a^3N_\IR\Mpl^2}D_t\left(\frac{N_\IR}{a^3\calH}\varpi^I\varpi_J\right)Q^J$ in EoM~(\ref{eq: 2nd order UV EoM}).
+The other one is that the momentum conjugate $\tilde{P}_I$ which directly causes the noise for $\varpi_I$ is not simply given by
+the covariant time derivative $\frac{a^3}{N_\IR}D_tQ_I$ but mixed with $Q^I$ by $\frac{a^3}{N_\IR}\tilde{M}^2_{PQIJ}Q^J$.
+
+We now derived the linearized UV EoM.
+To obtain the noise amplitude, one has to solve these EoM with an appropriate initial condition.
+First the mode function is defined by Eq.~(\ref{eq: mode expansion})
+\bae{
+	\bce{
+		\dps
+		\hat{Q}^I(x)=\int\dk\left[Q^I_\alpha(t,k)\hat{a}_\alpha(\mathbf{k})\ee^{i\kdx}
+		+Q^{*I}_\alpha(t,k)\hat{a}^\dagger_\alpha(\mathbf{k})\ee^{-i\kdx}\right], \\[10pt]
+		\dps
+		\hat{\tilde{P}}_I(x)=\int\dk\left[\tilde{P}_{I\alpha}(t,k)\hat{a}_\alpha(\mathbf{k})\ee^{i\kdx}
+		+\tilde{P}^*_{I\alpha}(t,k)\hat{a}^\dagger_\alpha(\mathbf{k})\ee^{-i\kdx}\right],
+	}
+}
+with the creation-annihilation operator normalized by Eq.~(\ref{eq: aadagger})
+\bae{\label{eq: aadagger App}
+	[\hat{a}_\alpha(\mathbf{k}),\hat{a}^\dagger_\beta(\mathbf{q})]=(2\pi)^3\delta_{\alpha\beta}(\mathbf{k}-\mathbf{q}).
+}
+In the subhorizon limit, one can find the $\frac{k}{a}$-leading solution of Eq.~(\ref{eq: UV EoM}) by the WKB form up to the overall normalization as
+\bae{
+	\bce{
+		\dps
+		Q^I_\alpha(t,k)=f(t,k)e^I_\alpha(t)\exp\left[-i\int\frac{kN_\IR}{a}\dd t\right], \\[10pt]
+		\dps
+		\tilde{P}_{I\alpha}(t,k)=-ia^2kf(t,k)e_{I\alpha}(t)\exp\left[-i\int\frac{kN_\IR}{a}\dd t\right],
+	}
+}
+where $e^I_\alpha$ is the parallel transported vielbein:\footnote{Once the vielbein is determined by the normalization 
+condition~(\ref{eq: normalization of vielbein}) at some initial time, the solution of the parallel transport condition~(\ref{eq: parallel transport condition})
+always satisfies its normalization~\cite{Weinberg:2008zzc} irrespectively of the stochasticity of $\dot{\varphi}$.}
+\bae{
+	&e^I_\alpha(t) e^J_\alpha(t)=G^{IJ}(\varphi(t)), \label{eq: normalization of vielbein} \\
+	&D_te^I_\alpha=\dot{e}^I_\alpha+\Gamma^I_{JK}\dot{\varphi}^Je^K_\alpha=0. \label{eq: parallel transport condition}
+}
+By imposing the canonical quantization condition as\footnote{Note that the canonical quantization is defined by the commutator of $Q$ and $D_tQ$
+in the literature~\cite{Dias:2015rca,Ronayne:2017qzn}. But the difference between $\tilde{P}$ and $D_tQ$ is proportional to $Q$
+which does not affect the commutator with $Q$ itself, and therefore our quantization is equivalent.}
+\bae{
+	[\hat{Q}^I(t,\mathbf{x}),\hat{\tilde{P}}_J(t,\mathbf{y})]=i\delta^I_J\delta^{(3)}(\mathbf{x}-\mathbf{y}),
+}
+and with use of the commutation relation~(\ref{eq: aadagger App}), the normalization of $f(t,k)$ is determined as
+\bae{
+	|f(t,k)|^2=\frac{1}{2ka^2}.
+}
+Therefore, up to the irrelevant constant phase shift, the initial condition of the mode functions is given by
+\bae{
+	\bce{
+		\dps
+		Q^I_\alpha(t,k)=\frac{1}{\sqrt{2k}a}e^I_\alpha\exp\left[-i\int\frac{kN_\IR}{a}\dd t\right], \\[10pt]
+		\dps
+		\tilde{P}_{I\alpha}(t,k)=-i\sqrt{\frac{k}{2}}ae_{I\alpha}\exp\left[-i\int\frac{kN_\IR}{a}\dd t\right].
+	}
+}
+By solving EoM~(\ref{eq: UV EoM}) analytically or numerically with this initial condition, one can calculate the noise correlation~(\ref{eq: calP})
+\bae{
+	\calP_{XY}{}^{IJ}(k_\sigma)=\frac{k^3}{2\pi^2}Q_{X\alpha}^I(k_\sigma)Q_{Y\alpha}^{*J}(k_\sigma).
+}
+
+
+\subsubsection{Neglecting mixing}
+
+As a simple exercise, let us consider the case where the all mixing terms can be neglected and the EoM for the mode function is approximated as
+\bae{
+	D_tQ^I_\alpha\simeq\frac{N_\IR}{a^3}\tilde{P}^I_\alpha, \quad\quad 
+	D_t\tilde{P}_{I\alpha}\simeq-a^3N_\IR\left(\frac{k^2}{a^2}+m_\alpha^2(t)\right)Q_{I\alpha}.
+}
+Here the summation in the index $\alpha$ is not taken and $m_\alpha^2(t)$ represents a time-depending effective mass squared 
+for $\alpha$ mode. With use of the parallel transported vielbein $e^I_\alpha$~(\ref{eq: parallel transport condition}), 
+the solution is formally given by
+\bae{
+	Q^I_\alpha(t,k)=g_\alpha(t,k)e^I_\alpha, \quad\quad \tilde{P}_{I\alpha}(t,k)=\frac{a^3}{N_\IR}\dot{g}_\alpha(t,k)e_{I\alpha},
+}
+where $g(t,k)$ satisfies single-field like EoM
+\bae{
+	\frac{1}{N_\IR^2}\ddot{g}_\alpha(t,k)+\frac{1}{N_\IR^2}\left(3\calH-\frac{\dot{N}_\IR}{N_\IR}\right)\dot{g}_\alpha(t,k)
+	+\left(\frac{k^2}{a^2}+m^2_\alpha(t)\right)g_\alpha(t,k)=0.
+}
+Again the $\alpha$-summation is not taken. Then the noise amplitude is given by
+\bae{
+	\bce{
+		\dps
+		\calP_{QQ}{}^{IJ}(k_\sigma)=\frac{k^3}{2\pi^2}\sum_\alpha g_\alpha(k_\sigma)g^*_\alpha(k_\sigma)e^I_\alpha e^J_\alpha, \\[10pt]
+		\dps
+		\calP_{QP}{}^I{}_J(k_\sigma)=\calP^*_{PQJ}{}^I=\frac{k^3}{2\pi^2}\frac{a^3}{N_\IR}\sum_\alpha g_\alpha(k_\sigma)\dot{g}^*_\alpha(k_\sigma)e^I_\alpha e_{J\alpha}, \\[10pt]
+		\dps
+		\calP_{PPIJ}(k_\sigma)=\frac{k^3}{2\pi^2}\frac{a^6}{N_\IR^2}\sum_\alpha\dot{g}_\alpha(k_\sigma)\dot{g}^*_\alpha(k_\sigma)e_{I\alpha}e_{J\alpha}.
+	}
+}
+
+In the constant-mass and de Sitter approximation, the solution for $g_\alpha$ reads a well-known Hankel-function type:
+\bae{
+	g_\alpha(t,k)=\frac{1}{a}\sqrt{\frac{\pi}{4k}}\sqrt{x}H_{\nu_\alpha}^{(1)}(x), \quad\quad 
+	\left(x=-k\tau \text{ and } \nu_\alpha=\sqrt{\frac{9}{4}-\frac{m_\alpha^2}{H^2}}\right),
+}
+where $\tau$ is a conformal time which is equivalent to $-1/aH$ in the de Sitter limit and $H_\nu^{(1)}$ is the Hankel function of the first kind.
+Moreover, if all the masses are sufficiently small as $\nu_\alpha\to3/2$, the noise amplitude is much simplified as
+\bae{
+	\calP_{QQ}{}^{IJ}=\left(\frac{H}{2\pi}\right)^2(1+\sigma^2)G^{IJ}, \quad\quad \calP_{QP}{}^I{}_J=\frac{a^3H^3}{4\pi^2}(-\sigma^2+i\sigma^3)\delta^I_J,
+	\quad\quad \calP_{PPIJ}=\frac{a^6H^4}{4\pi^2}\sigma^4G_{IJ},
+}
+for the cosmic time $N_\IR=1$.
+Therefore almost all terms are suppressed by $\sigma$ except for the standard noise amplitude $(H/2\pi)^2$ in $\calP_{QQ}$.
+All of the dangerous imaginary parts of $\calP$ are also higher order in $\sigma$.
+
+
+
+\subsection{It\^o vs. Stratonovich}
+
+We have seen that the noise for IR modes has a white spectrum as a consequence of the sharp step window function.
+Though white noise is easily to handle with, it should be interpreted as a limit of a realistic colored noise corresponding with a physical smooth window.
+At the price of this simplification, there is an uncertainty on the mathematical prescription of noise integral. We here briefly mention this problem.
+
+Equations of motion with random noise are mathematically dealt with by stochastic calculus.
+In stochastic calculus, the definition of the noise integral has an uncertainty whether 
+the noise amplitude is evaluated before or after the noise kick.
+Representatively, the It\^o integral evaluates the noise amplitude just before the noise kick, while the evaluation point is a middle point between before and after the noise kick in the Stratonovich type definition.
+In general, the It\^o's definition is preferred to reflect the fact that nobody knows the future, and in fact many authors also have interpreted the Langevin equations in the It\^o's way from the viewpoint of causality in the context of stochastic inflation~\cite{Salopek:1990re,Vilenkin:1999kd,Tolley:2008na,Fujita:2014tja,Vennin:2015hra,Tokuda:2017fdh}.
+However in physics, the Stratonovich integral also appears in some cases because the Langevin equation is often derived in some limits.
+Ref.~\cite{Mezhlumian:1991hw} claims that the noise amplitude should be evaluated at the middle point of the window as the Stratonovich integral
+since the sharp window is a limit of the physical smooth one.
+
+We point out that there are drawbacks both for the It\^o and Stratonovich interpretations.
+For the It\^o integral, it is known that the ordinary differential calculus does not hold but the chain rule is corrected by the noise amplitude.
+If variables $X^I$ satisfy the Langevin equation
+\bae{
+	\dot{X}^I=f^I+\xi^I,
+}
+the equation of motion for redefined fields $\tilde{X}^{\tilde{I}}$ is given by the It\^o's lemma as
+\bae{
+	\dot{\tilde{X}}^{\tilde{I}}=\pdif{\tilde{X}^{\tilde{I}}}{X^J}\left(f^J+\xi^J\right)+\frac{1}{2}\frac{\partial^2\tilde{X}^{\tilde{I}}}{\partial X^J\partial X^K}A^{JK},
+}
+where $A^{JK}$ represents the noise amplitude: $\braket{\xi^I(t)\xi^J(t^\prime)}=A^{JK}\delta(t-t^\prime)$. Due to the last term, the Langevin equation is not
+actually covariant under the field redefinition if it is interpreted in the It\^o's way.
+On the other hand, if one interprets the Langevin equation as a Stratonovich type,
+the field space invariance is manifest because the ordinary chain rule does hold for the Stratonovich SDE.
+In this case, however, the Stratonovich process depends on the choice of the square root of the noise amplitude, which is not unique in a multi-field case since
+the noise amplitude is a matrix. The subhorizon dynamics only tells us the noise amplitude of the correlation function, and therefore the Stratonovich-type Langevin
+equation is undetermined in principle. 
+%Note that both drawbacks are proportional to the noise correlator (i.e. quadratic order of the noise) and there is no difference between the It\^o and Stratonovich definition at the linear order in noise.
+We will address these issues in separated articles~\cite{1st,3rd,4th}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+Under the field space transformation $\varphi^I\to\varphi^{\prime A}(\varphi^I)$, the drift term $\frac{N_\IR}{a^3}\varpi^I$ for $\dot{\varphi}^I$ does not transform as a standard vector $\frac{N_\IR}{a^3}\varpi^{\prime A}=\pdif{\varphi^{\prime A}}{\varphi^I}\frac{N_\IR}{a^3}\varpi^I$ but does as $\frac{N_\IR}{a^3}\varpi^{\prime A}=\pdif{\varphi^{\prime A}}{\varphi^I}\frac{N_\IR}{a^3}\varpi^I+\frac{1}{2}\frac{\partial^2\varphi^{\prime A}}{\partial\varphi^I\partial\varphi^J}\Re\Pi_{QQ}{}^{IJ}$ according to the It\^o's lemma.
+It means that the Hubble parameter given by the Friedmann equation~(\ref{eq: Friedmann eq}) is no longer field space invariant though it should be.
+On the other hand, if one interprets the Langevin equation as a Stratonovich type,
+the field space invariance is manifest because the ordinary chain rule does hold for the Stratonovich SDE.
+In this case, however, the Stratonovich process is not invariant under the rotation of the noise basis and therefore it is undetermined because we only know the correlation of the noise.
+Note that both drawbacks are proportional to the noise correlator (i.e. quadratic order of the noise) and there is no difference between the It\^o and Stratonovich definition at the linear order in noise.
+We will address these issues in a separated article.
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+\section{Conclusions}\label{sec: conclusions}
+
+The stochastic formalism is formulated in a curved field space. The effective Hamiltonian action approach is used as well as the heuristic
+equation of motion method, including metric perturbations.
+Though they do not affect the form of EoM for coarse-grained (IR) modes, metric perturbations alter the subhorizon (UV) dynamics.
+Also the explicit appearance of the lapse function reveals that the Friedmann equation still holds in each Hubble patch without any noise.
+In the last section, we briefly mention the uncertainty of noise integral represented by the It\^o or Stratonovich process, which will be addressed
+in separated papers~\cite{1st,3rd,4th}.
+
+As recently pointed out by Tokuda and Tanaka~\cite{Tokuda:2017fdh}, the IR-UV coupling is chosen ad hoc so that the two point function is reproduced 
+at the free particle limit. More rigorous understanding of this problem has not been reached and left for future works.
+The effective action approach in the path integral method can be naturally extended to the loop calculations beyond the tree level.
+In this case, the time-independent counter terms should be properly taken so that only the UV loop contributions are cancelled~\cite{Tokuda:2017fdh}.
+We will also address this topic in a coming article~\cite{4th}.
+
+One of the characteristic phenomena of curved field spaces is the so-called geometrical destabilization of inflation~\cite{Renaux-Petel:2015mga,
+Renaux-Petel:2017dia,Garcia-Saenz:2018ifx}. The negative field space curvature gives an effective destabilizing force for entropic directions~\cite{Renaux-Petel:2015mga}.
+Therefore, if this geometrical destabilizing force grows during inflation, the entropic directions can suddenly develop large perturbations dominating 
+the homogeneous mode even if those directions are stabilized originally. Compared to the classical hybrid inflation model, the remarkable point of this mechanism
+is that the second slow-roll phase would take place after the destabilization point~\cite{Garcia-Saenz:2018ifx} and therefore possibly affects not only on
+invisibly small scales but also on observable large scales.
+Since the perturbative expansion is broken down around the critical point due to large fluctuations, one must resort to a non-perturbative method represented e.g. by
+the stochastic formalism which we derived here, and we left it for future works.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+Inspired by recent progress in the framework of curved-field-space inflation like 
+\emph{geometrical destabilization}~\cite{Renaux-Petel:2015mga,Renaux-Petel:2017dia}, \emph{hyperinflation}~\cite{Brown:2017osf,Mizuno:2017idt},
+and so on, we formulate the stochastic inflation in the curved field space case in this paper.
+The fully covariant Langevin equations~(\ref{eq: covariant Langevin}) are derived in the effective Hamiltonian action approach, 
+including metric perturbations.
+While the metric perturbations only affect the equation of motion of the subhorizon mode functions,
+the explicit appearance of the lapse function reveals that the Friedmann equation~(\ref{eq: Friedmann eq}) still holds in each Hubble patch 
+without any noise.
+
+As recently pointed out by Tokuda and Tanaka~\cite{Tokuda:2017fdh}, there is a fundamental problem in the time-depending decomposition
+of the path integral measure and it is not completely understood but left as an important subject of future works.
+Also we will study the behavior around or after the critical point in the geometrical destabilization framework with use of the obtained Langevin equations.
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\acknowledgments
+
+We would like to thank Takahiro Tanaka, Junsei Tokuda and Vincent Vennin for fruitful discussions.
+YT is supported by grants from R\'egion \^Ile-de-France and Grand-in-Aid for JSPS Research Fellow (JP18J01992).
+
+
+
+
+%\appendix
+
+
+
+
+
+
+\bibliographystyle{JHEP}
+\bibliography{non-flat-stochastic}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
